@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Calculator - Your Journey Begins Here</title>
+    <link rel="stylesheet" href="pregnancy-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Baby Icons Background -->
+    <div class="floating-icons">
+        <span class="float-icon" style="--delay: 0s; --duration: 20s;">👶</span>
+        <span class="float-icon" style="--delay: 5s; --duration: 25s;">🍼</span>
+        <span class="float-icon" style="--delay: 10s; --duration: 22s;">🎀</span>
+        <span class="float-icon" style="--delay: 15s; --duration: 28s;">💕</span>
+        <span class="float-icon" style="--delay: 3s; --duration: 24s;">🧸</span>
+        <span class="float-icon" style="--delay: 8s; --duration: 26s;">⭐</span>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-icon">🤰</div>
+                <h1 class="title">Pregnancy Calculator</h1>
+                <p class="subtitle">Your beautiful journey begins here</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Calculator Card -->
+            <div class="calculator-card">
+                <div class="card-header">
+                    <h2 class="card-title">Calculate Your Due Date</h2>
+                    <p class="card-subtitle">Enter your information below to estimate your baby's arrival</p>
+                </div>
+
+                <form class="calculator-form" id="calculatorForm">
+                    <!-- Last Menstrual Period -->
+                    <div class="form-group">
+                        <label for="lmpDate" class="form-label">
+                            <span class="label-icon">📅</span>
+                            First Day of Last Menstrual Period (LMP)
+                        </label>
+                        <input 
+                            type="date" 
+                            id="lmpDate" 
+                            class="form-input" 
+                            required
+                        />
+                        <small class="form-help">Select the first day of your last period</small>
+                    </div>
+
+                    <!-- Cycle Length -->
+                    <div class="form-group">
+                        <label for="cycleLength" class="form-label">
+                            <span class="label-icon">🔄</span>
+                            Average Cycle Length
+                        </label>
+                        <div class="input-with-unit">
+                            <input 
+                                type="number" 
+                                id="cycleLength" 
+                                class="form-input" 
+                                value="28"
+                                min="21"
+                                max="35"
+                                required
+                            />
+                            <span class="input-unit">days</span>
+                        </div>
+                        <small class="form-help">Typical range: 21-35 days (average is 28)</small>
+                    </div>
+
+                    <!-- Calculation Method -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">🔍</span>
+                            Calculation Method
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="calcMethod" value="lmp" checked>
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">By LMP Date</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="calcMethod" value="conception">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">By Conception Date</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="calcMethod" value="ultrasound">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">By Ultrasound</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Conception Date (conditional) -->
+                    <div class="form-group" id="conceptionGroup" style="display: none;">
+                        <label for="conceptionDate" class="form-label">
+                            <span class="label-icon">💫</span>
+                            Conception/Ovulation Date
+                        </label>
+                        <input 
+                            type="date" 
+                            id="conceptionDate" 
+                            class="form-input"
+                        />
+                    </div>
+
+                    <!-- Ultrasound Date (conditional) -->
+                    <div class="form-group" id="ultrasoundGroup" style="display: none;">
+                        <label for="ultrasoundDate" class="form-label">
+                            <span class="label-icon">🏥</span>
+                            Ultrasound Date
+                        </label>
+                        <input 
+                            type="date" 
+                            id="ultrasoundDate" 
+                            class="form-input"
+                        />
+                        <label for="ultrasoundWeeks" class="form-label" style="margin-top: 1rem;">
+                            Gestational Age at Ultrasound
+                        </label>
+                        <div class="weeks-days-input">
+                            <div class="input-with-unit">
+                                <input 
+                                    type="number" 
+                                    id="ultrasoundWeeks" 
+                                    class="form-input" 
+                                    placeholder="0"
+                                    min="0"
+                                    max="42"
+                                />
+                                <span class="input-unit">weeks</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input 
+                                    type="number" 
+                                    id="ultrasoundDays" 
+                                    class="form-input" 
+                                    placeholder="0"
+                                    min="0"
+                                    max="6"
+                                />
+                                <span class="input-unit">days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button type="submit" class="btn-calculate">
+                        <span class="btn-icon">✨</span>
+                        Calculate Due Date
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <!-- Due Date Card -->
+                <div class="result-card highlight-card">
+                    <div class="result-icon">🎉</div>
+                    <h3 class="result-title">Estimated Due Date</h3>
+                    <div class="result-value" id="dueDate">---</div>
+                    <p class="result-subtitle" id="dueDateText">Your baby's expected arrival</p>
+                </div>
+
+                <!-- Current Week Card -->
+                <div class="result-card">
+                    <div class="result-icon">📊</div>
+                    <h3 class="result-title">Current Stage</h3>
+                    <div class="result-value-small" id="currentWeek">---</div>
+                    <p class="result-subtitle" id="trimesterText">---</p>
+                </div>
+
+                <!-- Days Remaining Card -->
+                <div class="result-card">
+                    <div class="result-icon">⏰</div>
+                    <h3 class="result-title">Days Remaining</h3>
+                    <div class="result-value-small" id="daysRemaining">---</div>
+                    <p class="result-subtitle" id="daysRemainingText">Until your due date</p>
+                </div>
+
+                <!-- Conception Window Card -->
+                <div class="result-card">
+                    <div class="result-icon">💝</div>
+                    <h3 class="result-title">Conception Window</h3>
+                    <div class="result-value-small" id="conceptionWindow">---</div>
+                    <p class="result-subtitle">Estimated conception period</p>
+                </div>
+
+                <!-- Important Dates -->
+                <div class="dates-timeline">
+                    <h3 class="timeline-title">Important Milestones</h3>
+                    <div class="timeline" id="timeline">
+                        <!-- Timeline items will be dynamically added -->
+                    </div>
+                </div>
+
+                <!-- Weekly Information -->
+                <div class="weekly-info" id="weeklyInfo">
+                    <h3 class="weekly-title">This Week's Development</h3>
+                    <div class="weekly-content">
+                        <div class="weekly-illustration" id="weeklyIllustration">
+                            <div class="baby-size-comparison">
+                                <span class="size-emoji" id="sizeEmoji">🫘</span>
+                                <p class="size-text" id="sizeText">About the size of a bean</p>
+                            </div>
+                        </div>
+                        <div class="weekly-details">
+                            <h4 class="details-title" id="weekTitle">Week 1</h4>
+                            <p class="details-description" id="weekDescription">Your pregnancy journey is just beginning...</p>
+                            <div class="development-highlights">
+                                <h5>Key Developments:</h5>
+                                <ul id="developmentList">
+                                    <li>Development information will appear here</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trimester Overview -->
+                <div class="trimester-overview">
+                    <h3 class="overview-title">Your Pregnancy Journey</h3>
+                    <div class="trimesters-grid">
+                        <div class="trimester-card" id="trimester1">
+                            <div class="trimester-icon">🌱</div>
+                            <h4>First Trimester</h4>
+                            <p class="trimester-weeks">Weeks 1-13</p>
+                            <p class="trimester-desc">The beginning of your journey</p>
+                        </div>
+                        <div class="trimester-card" id="trimester2">
+                            <div class="trimester-icon">🌸</div>
+                            <h4>Second Trimester</h4>
+                            <p class="trimester-weeks">Weeks 14-27</p>
+                            <p class="trimester-desc">The "honeymoon" phase</p>
+                        </div>
+                        <div class="trimester-card" id="trimester3">
+                            <div class="trimester-icon">🌺</div>
+                            <h4>Third Trimester</h4>
+                            <p class="trimester-weeks">Weeks 28-40+</p>
+                            <p class="trimester-desc">The final stretch</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-disclaimer">
+                <strong>Disclaimer:</strong> This calculator provides estimates based on standard calculations. 
+                Always consult with your healthcare provider for accurate medical advice and pregnancy care.
+            </p>
+            <p class="footer-text">Made with 💕 for all the amazing moms-to-be</p>
+        </footer>
+    </div>
+
+    <script src="pregnancy-script.js"></script>
+</body>
+</html>
